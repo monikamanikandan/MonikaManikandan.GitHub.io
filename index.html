@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Monika Manikandan — Data Analyst</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root{
@@ -25,16 +24,17 @@
   body{
     background:var(--paper);
     color:var(--text);
-    font-family:'IBM Plex Sans', Arial, sans-serif;
+    font-family:'IBM Plex Sans', sans-serif;
     font-size:16px;
     line-height:1.55;
     -webkit-font-smoothing:antialiased;
   }
   .wrap{max-width:var(--max); margin:0 auto; padding:0 28px;}
-  h1,h2,h3{font-family:'Space Grotesk', Arial, sans-serif; letter-spacing:-0.01em;}
+  h1,h2,h3{font-family:'Space Grotesk', sans-serif; letter-spacing:-0.01em;}
   a{color:inherit;}
   .mono{font-family:'IBM Plex Mono', monospace;}
 
+  /* ---------- NAV ---------- */
   header.site{
     position:sticky; top:0; z-index:50;
     background:rgba(244,246,245,0.86);
@@ -45,7 +45,7 @@
     max-width:var(--max); margin:0 auto; padding:16px 28px;
     display:flex; align-items:center; justify-content:space-between;
   }
-  .brand{font-family:'Space Grotesk', Arial, sans-serif; font-weight:700; font-size:1.05rem; letter-spacing:-0.02em;}
+  .brand{font-family:'Space Grotesk', sans-serif; font-weight:700; font-size:1.05rem; letter-spacing:-0.02em;}
   .brand span{color:var(--teal);}
   nav ul{list-style:none; display:flex; gap:28px;}
   nav a{
@@ -54,7 +54,9 @@
   }
   nav a:hover{color:var(--teal);}
   nav .navlinks{display:flex;}
+  .navtoggle{display:none; background:none; border:none; font-size:1.4rem; cursor:pointer; color:var(--ink);}
 
+  /* ---------- HERO ---------- */
   .hero{
     background:var(--ink);
     color:var(--paper);
@@ -83,9 +85,15 @@
     font-size:clamp(2.4rem, 6vw, 4.1rem);
     font-weight:700; line-height:1.03; max-width:760px;
   }
-  .hero h1 em{ font-style:normal; color:var(--teal); }
-  .hero p.lede{ margin-top:22px; max-width:560px; font-size:1.08rem; color:#C6D3D6; }
-  .hero .cta-row{ margin-top:34px; display:flex; gap:14px; flex-wrap:wrap; align-items:center; }
+  .hero h1 em{
+    font-style:normal; color:var(--teal);
+  }
+  .hero p.lede{
+    margin-top:22px; max-width:560px; font-size:1.08rem; color:#C6D3D6;
+  }
+  .hero .cta-row{
+    margin-top:34px; display:flex; gap:14px; flex-wrap:wrap; align-items:center;
+  }
   .btn{
     font-family:'IBM Plex Mono', monospace; font-size:0.85rem;
     padding:12px 22px; border-radius:2px; text-decoration:none;
@@ -100,8 +108,9 @@
     margin-top:44px; display:flex; gap:32px; flex-wrap:wrap;
     font-family:'IBM Plex Mono', monospace; font-size:0.82rem; color:#9FB3B6;
   }
-  .hero-meta strong{color:var(--paper); display:block; font-size:0.78rem; text-transform:uppercase; letter-spacing:.08em; margin-bottom:4px; font-family:'IBM Plex Sans',Arial,sans-serif;}
+  .hero-meta strong{color:var(--paper); display:block; font-size:0.78rem; text-transform:uppercase; letter-spacing:.08em; margin-bottom:4px; font-family:'IBM Plex Sans',sans-serif;}
 
+  /* ---------- SECTION SHELL ---------- */
   section{padding:76px 0;}
   .section-head{margin-bottom:40px;}
   .section-head .tag{
@@ -109,30 +118,28 @@
     letter-spacing:0.14em; color:var(--teal); margin-bottom:10px; display:block;
   }
   .section-head h2{font-size:clamp(1.6rem,3vw,2.2rem); font-weight:600;}
+  .reveal{opacity:0; transform:translateY(18px); transition:opacity .6s ease, transform .6s ease;}
+  .reveal.in{opacity:1; transform:translateY(0);}
 
-  .reveal.js-hide{ opacity:0; transform:translateY(18px); }
-  .reveal{ transition:opacity .6s ease, transform .6s ease; }
-
+  /* ---------- IMPACT (signature) ---------- */
   .impact{background:var(--paper-dim); border-top:1px solid var(--line); border-bottom:1px solid var(--line);}
   .impact-grid{display:grid; gap:22px;}
-  .impact-row{ display:grid; grid-template-columns:200px 1fr 90px; gap:18px; align-items:center; }
+  .impact-row{
+    display:grid; grid-template-columns:200px 1fr 90px; gap:18px; align-items:center;
+  }
   .impact-row .label{font-size:0.92rem; color:var(--text); font-weight:500;}
   .impact-row .track{
     height:10px; background:rgba(15,36,49,0.08); border-radius:6px; overflow:hidden; position:relative;
   }
   .impact-row .fill{
-    position:absolute; left:0; top:0; bottom:0; border-radius:6px;
+    position:absolute; left:0; top:0; bottom:0; width:0%; border-radius:6px;
     background:linear-gradient(90deg, var(--teal), #57D9C8);
     transition:width 1.1s cubic-bezier(.2,.8,.2,1);
   }
-  .impact-row[data-pct="30"] .fill{ width:30%; }
-  .impact-row[data-pct="25"] .fill{ width:25%; }
-  .impact-row[data-pct="50"] .fill{ width:50%; }
-  .impact-row[data-pct="70"] .fill{ width:70%; }
-  .impact-row.js-anim .fill{ width:0%; }
   .impact-row.amber .fill{background:linear-gradient(90deg, var(--amber), #F2C06E);}
   .impact-row .value{font-family:'IBM Plex Mono', monospace; font-weight:600; text-align:right; color:var(--ink);}
 
+  /* ---------- EXPERIENCE ---------- */
   .timeline{border-left:2px solid var(--line); margin-left:8px;}
   .tl-item{position:relative; padding:0 0 44px 32px;}
   .tl-item:last-child{padding-bottom:4px;}
@@ -141,12 +148,13 @@
     border-radius:50%; background:var(--paper); border:2px solid var(--teal);
   }
   .tl-head{display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px; align-items:baseline;}
-  .tl-role{font-size:1.15rem; font-weight:600; font-family:'Space Grotesk', Arial, sans-serif;}
+  .tl-role{font-size:1.15rem; font-weight:600; font-family:'Space Grotesk', sans-serif;}
   .tl-co{color:var(--teal); font-weight:500;}
   .tl-date{font-family:'IBM Plex Mono', monospace; font-size:0.82rem; color:var(--text-soft);}
   .tl-item ul{margin:14px 0 0 18px;}
   .tl-item li{margin-bottom:7px; color:var(--text-soft); font-size:0.96rem;}
 
+  /* ---------- PROJECTS ---------- */
   .proj-grid{display:grid; grid-template-columns:1fr 1fr; gap:22px;}
   .proj-card{
     background:#fff; border:1px solid var(--line); border-radius:6px; padding:28px;
@@ -160,310 +168,6 @@
   .proj-stack{display:flex; flex-wrap:wrap; gap:8px; margin-top:auto;}
   .chip{
     font-family:'IBM Plex Mono', monospace; font-size:0.72rem; padding:5px 10px;
-    background:var(--paper-dim); border-radius:20px; color:var(--ink-soft);
-  }
-
-  .skill-groups{display:grid; grid-template-columns:repeat(2,1fr); gap:26px;}
-  .skill-group h4{
-    font-family:'IBM Plex Mono', monospace; font-size:0.78rem; text-transform:uppercase;
-    letter-spacing:0.1em; color:var(--text-soft); margin-bottom:12px;
-  }
-  .skill-tags{display:flex; flex-wrap:wrap; gap:8px;}
-  .skill-tags span{
-    background:#fff; border:1px solid var(--line); padding:7px 13px; border-radius:20px;
-    font-size:0.86rem;
-  }
-
-  .edu-item{display:grid; grid-template-columns:1fr auto; gap:10px; padding:18px 0; border-bottom:1px solid var(--line);}
-  .edu-item:last-child{border-bottom:none;}
-  .edu-item h4{font-size:1.02rem; font-weight:600; font-family:'Space Grotesk',Arial,sans-serif;}
-  .edu-item .school{color:var(--text-soft); font-size:0.92rem; margin-top:2px;}
-  .edu-item .score{font-family:'IBM Plex Mono', monospace; font-weight:600; color:var(--teal); align-self:center;}
-
-  .pub-card{
-    background:var(--ink); color:var(--paper); border-radius:6px; padding:30px;
-    display:flex; gap:20px; align-items:flex-start;
-  }
-  .pub-card .pub-icon{
-    font-family:'IBM Plex Mono', monospace; font-size:0.7rem; color:var(--teal);
-    border:1px solid rgba(47,191,174,0.4); padding:6px 10px; border-radius:20px; white-space:nowrap;
-  }
-  .pub-card p{color:#C6D3D6; margin-top:8px; font-size:0.92rem;}
-  .pub-card h4{font-family:'Space Grotesk',Arial,sans-serif; font-size:1.05rem;}
-
-  footer{ background:var(--ink); color:var(--paper); padding:70px 0 40px; }
-  .contact-inner{display:flex; justify-content:space-between; flex-wrap:wrap; gap:40px;}
-  footer h2{font-size:clamp(1.8rem,4vw,2.6rem); max-width:520px;}
-  .contact-links{display:flex; flex-direction:column; gap:14px;}
-  .contact-links a{
-    display:flex; align-items:center; gap:10px; text-decoration:none; color:var(--paper);
-    font-family:'IBM Plex Mono', monospace; font-size:0.92rem; border-bottom:1px solid rgba(244,246,245,0.15);
-    padding-bottom:12px; transition:color .2s ease;
-  }
-  .contact-links a:hover{color:var(--teal);}
-  .foot-base{
-    margin-top:60px; padding-top:20px; border-top:1px solid rgba(244,246,245,0.12);
-    display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px;
-    font-size:0.78rem; color:#7F9295;
-  }
-
-  @media (max-width:760px){
-    nav ul{display:none;}
-    .impact-row{grid-template-columns:1fr; gap:8px;}
-    .impact-row .value{text-align:left;}
-    .proj-grid{grid-template-columns:1fr;}
-    .skill-groups{grid-template-columns:1fr;}
-    .edu-item{grid-template-columns:1fr;}
-    .tl-head{flex-direction:column; align-items:flex-start;}
-  }
-
-  @media (prefers-reduced-motion: reduce){
-    html{scroll-behavior:auto;}
-    .reveal{transition:none;}
-    .impact-row .fill{transition:none;}
-  }
-
-  :focus-visible{outline:2px solid var(--teal); outline-offset:2px;}
-  noscript .reveal{ opacity:1 !important; transform:none !important; }
-</style>
-</head>
-<body>
-
-<header class="site">
-  <nav>
-    <div class="brand">MM<span>.</span></div>
-    <ul class="navlinks">
-      <li><a href="#impact">Impact</a></li>
-      <li><a href="#experience">Experience</a></li>
-      <li><a href="#projects">Projects</a></li>
-      <li><a href="#skills">Skills</a></li>
-      <li><a href="#education">Education</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
-  </nav>
-</header>
-
-<section class="hero">
-  <div class="wrap">
-    <span class="eyebrow">Data Analyst · Puducherry, India</span>
-    <h1>Monika Manikandan turns raw data into <em>working software</em>.</h1>
-    <p class="lede">B.Tech IT graduate building the analyst/developer bridge — SQL-backed systems, React/Node features, and automation that measurably cuts waste and defects.</p>
-    <div class="cta-row">
-      <a class="btn btn-primary" href="#contact">Get in touch →</a>
-      <a class="btn btn-ghost" href="mailto:mmonikalt2002@gmail.com">mmonikalt2002@gmail.com</a>
-    </div>
-    <div class="hero-meta">
-      <div><strong>Experience</strong>2 roles, 2024–2026</div>
-      <div><strong>Education</strong>B.E. Information Technology · CGPA 8.72/10</div>
-      <div><strong>Published</strong>IJRASET, Vol. 12, Issue III</div>
-      <div><strong>Languages</strong>Tamil, English (native)</div>
-    </div>
-  </div>
-</section>
-
-<section class="impact" id="impact">
-  <div class="wrap">
-    <div class="section-head reveal">
-      <span class="tag">Measured outcomes</span>
-      <h2>Impact isn't a claim — it's a number.</h2>
-    </div>
-    <div class="impact-grid reveal">
-      <div class="impact-row" data-pct="30">
-        <div class="label">Data processing efficiency gained<br><span style="color:var(--text-soft); font-size:0.85rem;">via automated scripts, Datamatics</span></div>
-        <div class="track"><div class="fill"></div></div>
-        <div class="value">+30%</div>
-      </div>
-      <div class="impact-row amber" data-pct="25">
-        <div class="label">Software bugs reduced<br><span style="color:var(--text-soft); font-size:0.85rem;">rigorous testing &amp; debugging, eSales</span></div>
-        <div class="track"><div class="fill"></div></div>
-        <div class="value">−25%</div>
-      </div>
-      <div class="impact-row" data-pct="50">
-        <div class="label">New modules shipped<br><span style="color:var(--text-soft); font-size:0.85rem;">contributed directly to revenue growth</span></div>
-        <div class="track"><div class="fill"></div></div>
-        <div class="value">5</div>
-      </div>
-      <div class="impact-row amber" data-pct="70">
-        <div class="label">Code reviews conducted<br><span style="color:var(--text-soft); font-size:0.85rem;">strengthened team collaboration</span></div>
-        <div class="track"><div class="fill"></div></div>
-        <div class="value">10</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="experience">
-  <div class="wrap">
-    <div class="section-head reveal">
-      <span class="tag">Career so far</span>
-      <h2>Experience</h2>
-    </div>
-    <div class="timeline reveal">
-      <div class="tl-item">
-        <div class="tl-head">
-          <div class="tl-role">Data Analyst <span class="tl-co">— eSales Technologies</span></div>
-          <div class="tl-date mono">SEP 2025 – JUN 2026</div>
-        </div>
-        <ul>
-          <li>Developed and maintained software modules using React and Node.js — 5 modules shipped, contributing to revenue growth.</li>
-          <li>Designed SQL Server backend structures for application data storage and retrieval.</li>
-          <li>Tested and debugged code, cutting software bugs by 25%.</li>
-          <li>Ran agile sprints and conducted 10 code reviews to raise quality and team alignment.</li>
-          <li>Managed source control and collaboration through Git.</li>
-        </ul>
-      </div>
-      <div class="tl-item">
-        <div class="tl-head">
-          <div class="tl-role">Data Entry Specialist <span class="tl-co">— Datamatics Global Services Pvt Ltd</span></div>
-          <div class="tl-date mono">SEP 2024 – SEP 2025</div>
-        </div>
-        <ul>
-          <li>Processed and validated large volumes of data for a global digital-operations provider.</li>
-          <li>Built automated scripts that increased processing efficiency by 30%.</li>
-          <li>Maintained accuracy standards across daily data workflows.</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="projects" style="background:var(--paper-dim); border-top:1px solid var(--line); border-bottom:1px solid var(--line);">
-  <div class="wrap">
-    <div class="section-head reveal">
-      <span class="tag">Applied work</span>
-      <h2>Projects</h2>
-    </div>
-    <div class="proj-grid reveal">
-      <div class="proj-card">
-        <span class="proj-tag">Published Research · B.Tech Major Project</span>
-        <h3>Secured Blockchain for Agricultural Food Supply Chains</h3>
-        <p>A blockchain-based management system designed to improve traceability, security, and transparency as food moves through the agricultural supply chain. Findings published in IJRASET, Volume 12, Issue III (Paper ID: IJRASET59422).</p>
-        <div class="proj-stack">
-          <span class="chip">Blockchain</span>
-          <span class="chip">Supply Chain</span>
-          <span class="chip">Security</span>
-        </div>
-      </div>
-      <div class="proj-card">
-        <span class="proj-tag">Mini Project</span>
-        <h3>Library Management System</h3>
-        <p>A system for managing book records, circulation, and member data — built to streamline day-to-day library operations.</p>
-        <div class="proj-stack">
-          <span class="chip">Database Design</span>
-          <span class="chip">SQL</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="skills">
-  <div class="wrap">
-    <div class="section-head reveal">
-      <span class="tag">Toolkit</span>
-      <h2>Skills</h2>
-    </div>
-    <div class="skill-groups reveal">
-      <div class="skill-group">
-        <h4>Programming &amp; Web</h4>
-        <div class="skill-tags">
-          <span>Python</span><span>JavaScript</span><span>React</span><span>Node.js</span>
-        </div>
-      </div>
-      <div class="skill-group">
-        <h4>Data &amp; Databases</h4>
-        <div class="skill-tags">
-          <span>SQL</span><span>SQL Server</span><span>Data Handling</span><span>Data Visualization</span><span>Data Analysis</span>
-        </div>
-      </div>
-      <div class="skill-group">
-        <h4>Engineering Practice</h4>
-        <div class="skill-tags">
-          <span>Git</span><span>Code Review</span><span>Agile / Scrum</span><span>Debugging &amp; Testing</span>
-        </div>
-      </div>
-      <div class="skill-group">
-        <h4>Business</h4>
-        <div class="skill-tags">
-          <span>Customer Relationship Management</span><span>Cross-team Collaboration</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="education" style="background:var(--paper-dim); border-top:1px solid var(--line); border-bottom:1px solid var(--line);">
-  <div class="wrap">
-    <div class="section-head reveal">
-      <span class="tag">Background</span>
-      <h2>Education</h2>
-    </div>
-    <div class="reveal">
-      <div class="edu-item">
-        <div>
-          <h4>Bachelor of Engineering, Information Technology</h4>
-          <div class="school">Raak College of Engineering and Technology, Puducherry</div>
-        </div>
-        <div class="score">8.72 / 10 CGPA</div>
-      </div>
-      <div class="edu-item">
-        <div>
-          <h4>Higher Secondary (Class 12) — Biology-Maths</h4>
-          <div class="school">Thiruvalluvar Government Girls Higher Secondary School</div>
-        </div>
-        <div class="score">56 / 100</div>
-      </div>
-      <div class="edu-item">
-        <div>
-          <h4>Secondary School (Class 10)</h4>
-          <div class="school">Thiruvalluvar Government Girls Higher Secondary School</div>
-        </div>
-        <div class="score">70 / 100</div>
-      </div>
-    </div>
-
-    <div style="margin-top:36px;" class="reveal">
-      <div class="pub-card">
-        <span class="pub-icon">PUBLICATION</span>
-        <div>
-          <h4>Development of Secured Blockchain Based on Agricultural Food Supply Chain in Management System</h4>
-          <p>International Journal for Research in Applied Science &amp; Engineering Technology (IJRASET) · Paper ID IJRASET59422 · Volume 12, Issue III</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<footer id="contact">
-  <div class="wrap">
-    <div class="contact-inner">
-      <div>
-        <span class="eyebrow" style="color:var(--teal);">Let's talk</span>
-        <h2>Open to Data Analyst and Software Development roles.</h2>
-        <p style="margin-top:14px; color:#9FB3B6; max-width:420px;">Based in Puducherry, India — open to relocation and remote opportunities with international teams.</p>
-      </div>
-      <div class="contact-links">
-        <a href="mailto:mmonikalt2002@gmail.com">✉ &nbsp;mmonikalt2002@gmail.com</a>
-        <a href="tel:7448621980">☎ &nbsp;+91 74486 21980</a>
-        <a href="https://linkedin.com/in/mmonikalt2002" target="_blank" rel="noopener">in &nbsp;linkedin.com/in/mmonikalt2002</a>
-      </div>
-    </div>
-    <div class="foot-base">
-      <span>© 2026 Monika Manikandan</span>
-      <span>Puducherry, India</span>
-    </div>
-  </div>
-</footer>
-
-<script>
-(function(){
-  try {
-    var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (reduceMotion || !('IntersectionObserver' in window)) { return; }
-
-    var revealEls = document.querySelectorAll('.reveal');
-    revealEls.forEach(function(el){ el.
-IBM Plex Mono', monospace; font-size:0.72rem; padding:5px 10px;
     background:var(--paper-dim); border-radius:20px; color:var(--ink-soft);
   }
   .proj-link{font-size:0.85rem; color:var(--ink); text-decoration:none; font-weight:600; display:inline-flex; align-items:center; gap:6px;}
